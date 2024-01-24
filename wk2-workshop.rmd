@@ -2,7 +2,12 @@
 title: "Week 2 workshop"
 author: "Kai Lin A0240090W"
 date: "2024-01-24"
-output: github_document
+output: 
+  github_document:
+    toc: true
+    toc_depth: 2
+    fig_width: 7
+    fig_height: 6
 ---
 
 ```{r setup, include=FALSE}
