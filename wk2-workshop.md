@@ -4,6 +4,11 @@ Kai Lin A0240090W
 2024-01-24
 
 ``` r
+library(tidyverse)
+library(lubridate)
+```
+
+``` r
 data = readRDS("../data/wk2_stocks.rds")
 ```
 
@@ -26,14 +31,14 @@ period is 1.22%.
 plot(data$date, data$SPY_prices)
 ```
 
-![](wk2-workshop_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 ggplot(data, aes(x = date, y = SPY_prices)) +
   geom_line()
 ```
 
-![](wk2-workshop_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
 
 ``` r
 plot2 = data %>% group_by(year = year(date)) %>%
@@ -43,11 +48,11 @@ plot2 = data %>% group_by(year = year(date)) %>%
 plot(plot2$year, plot2$year_sum)
 ```
 
-![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 ggplot(plot2, aes(x = year, y = year_sum)) + 
   geom_col()
 ```
 
-![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
