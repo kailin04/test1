@@ -3,36 +3,51 @@ Week 2 workshop
 Kai Lin A0240090W
 2024-01-24
 
-- [R Markdown](#r-markdown)
-- [Including Plots](#including-plots)
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
-
 ``` r
-summary(cars)
+data = readRDS("../data/wk2_stocks.rds")
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+``` r
+cumu_returns = sum(data$SPY_returns)
 
-## Including Plots
+avg_return = mean(data$SPY_returns)
 
-You can also embed plots, for example:
+sd_returns = sd(data$SPY_returns)
+```
 
-![](wk2-workshop_files/figure-gfm/pressure-1.png)<!-- -->
+The cumulative returns of the S&P index during this period is 218.33%.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+The average daily returns of the S&P index during this period is 0.04%.
+
+The standard deviation of the daily returns of the S&P index during this
+period is 1.22%.
+
+``` r
+plot(data$date, data$SPY_prices)
+```
+
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+ggplot(data, aes(x = date, y = SPY_prices)) +
+  geom_line()
+```
+
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+
+``` r
+plot2 = data %>% group_by(year = year(date)) %>%
+  filter(year<=2023) %>%
+  summarise(year_sum = sum(SPY_returns)*100)
+
+plot(plot2$year, plot2$year_sum)
+```
+
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+ggplot(plot2, aes(x = year, y = year_sum)) + 
+  geom_col()
+```
+
+![](wk2-workshop_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
